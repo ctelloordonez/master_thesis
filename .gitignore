@@ -1,3 +1,5 @@
 data/ASCII_files/
 data/MAT_files/
 .idea
+
+__pycache__/
