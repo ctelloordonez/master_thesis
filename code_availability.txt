@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                        %
+% In this file, we provide examples of how to plot some signals          %
+% presented by this dataset. The example imports the data of Subject1,   %
+% but you can import data from other subjects.                           %
+%                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ------------------------------------------------------------------------
+% Author: Luís Moreira
+% Luís Moreira is with the Center for Microelectromechanical Systems
+% University of Minho.
+% Corresponding author to: luis.lihtss@gmail.com
+% ------------------------------------------------------------------------
+
+%% Create X-Axis Plot from 0 to 100 % (representing the Gait Cycle)
+no_samples = 1:1001;
+init_value = 1;
+fin_value = 1001;
+m = (100 - 0) / (fin_value - init_value);
+b = 0 - m * init_value;
+new_x = no_samples * m + b;
+
+%% Plot the processed knee joint angle of the right leg in the sagittal plane (X axis), at 4 km/h
+load('Subjects_Data\Subject1\Processed_Data.mat')
+plot(new_x,Subject1_pro.V4.R.Angles{5, 2}.St2_Knee_X,'LineWidth',3)
+xlim([1 100])
+grid on
+xlabel('Gait Cycle (%)')
+ylabel('Sagittal Knee Joint Angle (Degrees)')
+
+%% Plot the vertical component of raw Ground Reaction Force against time, at 3 km/h
+load('Subjects_Data\Subject1\Raw_Data.mat')
+plot(Subject1_raw.V3.GRF{2,2}.Time,Subject1_raw.V3.GRF{2,2}.R_GRF_Z,'LineWidth',3)
+grid on
+xlabel('Time (s)')
+ylabel('Ground Reaction Force (N)')
+
+%% Access the stride time (in seconds) of all trials of Subject1, at 2.5 km/h
+load('Subjects_Data\Subject1\Processed_Data.mat')
+Subject1_pro.V25.R.Stride_Time
